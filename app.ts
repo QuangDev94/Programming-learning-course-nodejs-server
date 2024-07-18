@@ -2,6 +2,7 @@ import express, { Request } from "express";
 export const app = express();
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { ErrorMiddleware } from "./middleware/error";
 require("dotenv").config();
 
 // body parser
@@ -17,6 +18,9 @@ app.use(
     origin: process.env.ORIGIN,
   }),
 );
+
+// Error Handler
+app.use(ErrorMiddleware);
 
 // Test
 app.get("/test", (req: Request, res, next) => {
